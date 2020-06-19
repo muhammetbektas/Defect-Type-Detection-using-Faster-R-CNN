@@ -82,7 +82,6 @@ item {
 
 (140 ve 142. satır) `input_path : "C:/tensorflow1/models/research/object_detection/test.record"`<br/>
 `label_map_path: "C:/tensorflow1/models/research/object_detection/training/labelmap.pbtxt"` Bu şekilde gözükmelidir ve ya sizin dosya konumlarınıza göre değişebilir.<br/>
-
 18. “inference_graph” dosyası içerisindeki her şeyi ve “training” dosyası içerisindeki kontrol noktalarını silelim. Daha sonra dizini ..\object_detection olacak şekilde ayarlayıp aşağıdaki komutu çalıştıralım ve modelimizi eğitmeye başlayalım.<br/>
 `python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config`<br/>
 
