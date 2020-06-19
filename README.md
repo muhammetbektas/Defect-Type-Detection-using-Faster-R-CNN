@@ -49,7 +49,9 @@ def class_text_to_int(row_label):
 `python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record`
 <br/>
 15. ..\object_detection\training dosyası içerisindeki “labelmap.pptxt” dosyasını bir editör yardımı ile açalım ve kendi sınıflarımıza göre düzenleme yapalım.<br/>
+
 ``` ruby
+
 item {
   id: 1
   name: 'DefectTypeA'
@@ -60,10 +62,13 @@ item {
 }
 item {
   id: 3
-  name: 'DefectTypeC'}
+  name: 'DefectTypeC'
+}
+
 ```
 <br/>
 16. Faster_rcnn_inception_v2.. klasörü içerisinde ki “pipeline.config” dosyasını ve ..\object_detection\samples\configs dosya konumunda ki “faster_rcnn_inception_v2_pets.config” dosyasını ..\object_detection\training dosyası içerisine kopyalayalım. <br/>
+
 17. Daha sonra “faster_rcnn_inception_v2_pets.config” dosyasını bir text editörü ile açalım. Bazı düzenlemeler yapmalıyız.<br/>
 
 (9. satır) num_classes değerini 3 olarak değiştirelim.<br/>
@@ -92,7 +97,10 @@ Kayıp değeri kalıcı bir şekilde 0.05 in altına düştüğünde “anaconda
 
 Şimdi sonuçları görelim.<br/>
 
-![A](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A.png) ![A2](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A2.png)
+Defect Tyepe A             |  Defect Type A
+:-------------------------:|:-------------------------:
+![A](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A.png)   |  ![A2](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A2.png)
 
-
-
+Defect Tyepe B             |  Defect Type C
+:-------------------------:|:-------------------------:
+![B](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/B.png)   |  ![C](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/C.png)
