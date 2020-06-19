@@ -1,7 +1,7 @@
 # Defect-Type-Detection-using-Faster-R-CNN
 ### Metal Levhalar Üzerindeki Hata Tiplerinin Tespiti <br/>
 Biz bu projeyi “Anaconda Prompt” üzerinden “Virtual Environment” oluşturarak gerçekleştirdik. Öncelikle Anaconda’ nın bilgisayarımızda kurulu olması gerekmektedir. <br/>
-Bu çalışmada Tensorflow v1.15 (CPU) kullandık. Buna uygun python sürümlerine [buradan](https://www.tensorflow.org/install/source#tested_build_configurations) bakabilirsiniz. Tensorflow GPU kullanmak için CUDA ve cuDNN indirmemiz gerekmektedir. Ekran kartınıza uygun versiyonları öğrenmek için [buraya](https://developer.nvidia.com/cuda-gpus) göz atabilirsiniz.
+Bu çalışmada Tensorflow v1.15.0 (CPU) kullandık. Buna uygun python sürümlerine [buradan](https://www.tensorflow.org/install/source#tested_build_configurations) bakabilirsiniz. Tensorflow GPU kullanmak için CUDA ve cuDNN indirmemiz gerekmektedir. Ekran kartınıza uygun versiyonları öğrenmek için [buraya](https://developer.nvidia.com/cuda-gpus) göz atabilirsiniz.
 1. İlk olarak https://github.com/tensorflow/models adresindeki dosyayı .zip formatında indirelim.(TensorFlow Object Detection API repository)<br/>
 2. C:/ dizininde “tensorflow1” isimli bir dosya açın ve indirdiğimiz “models_master.zip” dosyasını buraya çıkartalım ve ismini “models” olarak değiştirelim.<br/>
 3. Bu linkten “faster_rcnn_ inception_ v2_coco” eğitilmiş modelini indirelim. Bu dosyayı C:\tensorflow1\models\research\object_detection klasörüne çıkartalım.<br/>
