@@ -13,7 +13,6 @@ Bu çalışmada Tensorflow v1.15 (CPU) kullandık. Buna uygun python sürümleri
 `(tensorflow1) C:\>pip install --ignore-installed --upgrade tensorflow==1.15`<br/>
 `(tensorflow1) C:\>conda install -c anaconda protobuf`<br/>
 `(tensorflow1) C:\>pip install pillow lxml cython jupyter matplotlib pandas opencv-python` <br/>
-
 7. Pythonpath’ i belirtmemiz gerekiyor. “Virtual Environment” i aktif hale getirdiğimizde bu komutuda her zaman çalıştırmanız gerekiyor.<br/>
 `(tensorflow1) C:\>set PYTHONPATH=C:\tensorflow1\models;C:\tensorflow1\models\research;C:\tensorflow1\models\research\slim`<br/>
 8. tf_slim’ i kullanacağımız için bunu da yüklemeliyiz.<br/>
@@ -27,6 +26,8 @@ Bu çalışmada Tensorflow v1.15 (CPU) kullandık. Buna uygun python sürümleri
 11. Şimdi verileri Labelimg programı ile etiketleyelim. İlk önce aşağıdaki komutu çalıştıralım ve daha sonra command prompt a “labelimg” yazalım. <br/>
 `(tensorflow1) C:\>pip install labelimg`<br/>
 `(tensorflow1) C:\>labelimg`<br/>
+
+![labelimg](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/Labelimg.png)
 
 12. Fotoğrafları bu şekilde hem eğitim hemde test kümesi için etiketleyelim. Xml dosyaları ile birlikte fotoğrafları C:\tensorflow1\models\research\object_detection\images dizininde train ve test dosyaları oluşturarak buraya atalım.
 Xml dosyalarını .csv formatına dönüştürmek için aşağıdaki komutu çalıştıralım.<br/>
@@ -45,7 +46,8 @@ def class_text_to_int(row_label):
 ```
 14. “Record” dosyalarını oluşturmak için aşağıdaki komutları çalıştıralım. Öncesinde dizini şu şekilde ayarlayalım:<br/> `C:\tensorflow1\models\research\object_detection`<br/>
 `python generate_tfrecord.py --csv_input=images\train_labels.csv --image_dir=images\train --output_path=train.record`<br/>
-`python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record`<br/>
+`python generate_tfrecord.py --csv_input=images\test_labels.csv --image_dir=images\test --output_path=test.record`
+<br/>
 15. ..\object_detection\training dosyası içerisindeki “labelmap.pptxt” dosyasını bir editör yardımı ile açalım ve kendi sınıflarımıza göre düzenleme yapalım.<br/>
 ``` ruby
 item {
@@ -61,24 +63,36 @@ item {
   name: 'DefectTypeC'}
 ```
 <br/>
-16. Faster_rcnn_inception_v2.. klasörü içerisinde ki “pipeline.config” dosyasını ve ..\object_detection\samples\configs dosya konumunda ki “faster_rcnn_inception_v2_pets.config” dosyasını ..\object_detection\training dosyası içerisine kopyalayalım.<br/>
+16. Faster_rcnn_inception_v2.. klasörü içerisinde ki “pipeline.config” dosyasını ve ..\object_detection\samples\configs dosya konumunda ki “faster_rcnn_inception_v2_pets.config” dosyasını ..\object_detection\training dosyası içerisine kopyalayalım. <br/>
 17. Daha sonra “faster_rcnn_inception_v2_pets.config” dosyasını bir text editörü ile açalım. Bazı düzenlemeler yapmalıyız.<br/>
-#(9. satır) num_classes değerini 3 olarak değiştirelim.<br/>
-#(110. satır) faster_rcnn_v2_coco modeliniz nerede ise dosya yolunu doğru bir şekilde ayarlayın. fine_tune_checkpoint :<br/> `"C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"`<br/>
-#(126 ve 128. satır) `input_path : "C:/tensorflow1/models/research/object_detection/train.record"`<br/>
+
+(9. satır) num_classes değerini 3 olarak değiştirelim.<br/>
+
+(110. satır) faster_rcnn_v2_coco modeliniz nerede ise dosya yolunu doğru bir şekilde ayarlayın. fine_tune_checkpoint :<br/> `"C:/tensorflow1/models/research/object_detection/faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt"`<br/>
+
+(126 ve 128. satır) `input_path : "C:/tensorflow1/models/research/object_detection/train.record"`<br/>
 `label_map_path: "C:/tensorflow1/models/research/object_detection/training/labelmap.pbtxt"` Bu şekilde görünmelidir.<br/>
-#(132. satır) Test kümemizde kaç adet fotoğraf varsa belirtiniz.(num_examples)<br/>
-#(140 ve 142. satır) `input_path : "C:/tensorflow1/models/research/object_detection/test.record"`<br/>
+
+(132. satır) Test kümemizde kaç adet fotoğraf varsa belirtiniz.(num_examples)<br/>
+
+(140 ve 142. satır) `input_path : "C:/tensorflow1/models/research/object_detection/test.record"`<br/>
 `label_map_path: "C:/tensorflow1/models/research/object_detection/training/labelmap.pbtxt"` Bu şekilde gözükmelidir ve ya sizin dosya konumlarınıza göre değişebilir.<br/>
+
 18. “inference_graph” dosyası içerisindeki her şeyi ve “training” dosyası içerisindeki kontrol noktalarını silelim. Daha sonra dizini ..\object_detection olacak şekilde ayarlayıp aşağıdaki komutu çalıştıralım ve modelimizi eğitmeye başlayalım.<br/>
 `python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config`<br/>
+
+![shell](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/Shell.png)
 
 Kayıp değeri kalıcı bir şekilde 0.05 in altına düştüğünde “anaconda prompt” u kapatabiliriz.<br/>
 19. “inference_graph” dosyası oluşturalım. XXXX yazan yere son kontrol noktasına ait değeri girelim. ..\object_detection\training dosyasına bakabilirsiniz.<br/>
 `python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph`<br/>
 20. Modeli test etmek için komut satırına “idle” yazalım. Açılan pencerede sol üst köşeden “Object_detection_image.py” dosyasını seçelim. “num_classes” değişkenine sınıf sayımızı girelim ve test etmek istediğimiz resmin dosya yolunu aşağıda belirtelim. F5 ile çalıştırabiliriz.<br/>
 
+![objectd](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/Object_detection_image.png)
+
 Şimdi sonuçları görelim.<br/>
+
+![A](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A.png) ![A2](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A2.png)
 
 
 
