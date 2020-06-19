@@ -96,10 +96,10 @@ Kayıp değeri kalıcı bir şekilde 0.05 in altına düştüğünde “anaconda
 
 Şimdi sonuçları görelim.<br/>
 
-Defect Tyepe A             |  Defect Type A
+Defect Type A             |  Defect Type A
 :-------------------------:|:-------------------------:
 ![A](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A.png)   |  ![A2](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/A2.png)
 
-Defect Tyepe B             |  Defect Type C
+Defect Type B             |  Defect Type C
 :-------------------------:|:-------------------------:
 ![B](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/B.png)   |  ![C](https://github.com/muhammetbektas/Defect-Type-Detection-using-Faster-R-CNN/blob/master/Images/C.png)
